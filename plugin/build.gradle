@@ -24,13 +24,14 @@ android {
     applicationVariants.all { ApkVariant variant->
         variant.outputs.each { BaseVariantOutput output->
             // 主工程的asset目录绝对路径
-            String mainProjectAssetsFolderAbsPath = String.join(File.separator, project.getRootDir().absolutePath, "app", "src", "main", "assets");
+            String mainProjectAssetsFolderAbsPath = String.join(File.separator, project.getRootDir().absolutePath, "app", "src", "main", "assets", "plugin.apk");
             output.outputFile = new File(mainProjectAssetsFolderAbsPath);
         }
     }
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:26.0.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided "com.android.tools.build:gradle:3.0.1"
 }
