@@ -1,5 +1,7 @@
 package com.lilong.plugindemo.application;
 
+import com.lilong.plugindemo.plugin.PluginManager;
+
 import android.app.Application;
 import android.content.Context;
 
@@ -15,6 +17,7 @@ public class PluginDemoApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         sInstance = this;
+        PluginManager.getInstance().init();
     }
 
     public static PluginDemoApplication getInstance(){
