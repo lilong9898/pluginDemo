@@ -33,5 +33,10 @@ task clean(type: Delete) {
 }
 
 ext {
-
+    targetSdkVersion = 25
+    compileSdkVersion = 25
+    minSdkVersion = 15
+    buildToolsVersion = "25.0.2"
+    v7SupportLib = 'com.android.support:appcompat-v7:25.1.0'
 }
+

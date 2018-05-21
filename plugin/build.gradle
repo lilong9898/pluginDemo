@@ -4,12 +4,12 @@ import com.android.build.gradle.api.BaseVariantOutput
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.0.1'
+    compile rootProject.ext.v7SupportLib
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided "com.android.tools.build:gradle:3.0.1"
 }

@@ -7,9 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.lilong.plugindemo.ui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-
+    <RelativeLayout
+        android:id="@+id/layoutFragContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="50dp"/>
 </RelativeLayout>
