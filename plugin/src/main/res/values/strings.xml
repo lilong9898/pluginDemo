@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Plugin</string>
+    <string name="tv_text">插件文字</string>
 </resources>

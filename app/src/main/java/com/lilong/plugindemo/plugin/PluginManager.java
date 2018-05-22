@@ -1,11 +1,11 @@
 package com.lilong.plugindemo.plugin;
 
-import com.lilong.plugindemo.application.PluginDemoApplication;
-
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+
+import com.lilong.plugindemo.application.DemoApplication;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -25,7 +25,8 @@ public class PluginManager {
 
     private DexClassLoader mPluginClassLoader;
     private AssetManager mPluginAssetManager;
-    private Resources mPluginResource;
+    private Resources mPluginResources;
+    private Resources mProxyResources;
 
     private static volatile PluginManager sInstance;
 
@@ -57,7 +58,7 @@ public class PluginManager {
      * 插件apk要被复制到的目录绝对路径
      */
     public String getAppFileDirAbsPath() {
-        return PluginDemoApplication.getInstance().getFilesDir().getAbsolutePath();
+        return DemoApplication.getInstance().getFilesDir().getAbsolutePath();
     }
 
     /**
@@ -69,9 +70,10 @@ public class PluginManager {
 
     public void init() {
         copyPluginApkFromAssetsToFileDir();
-        mPluginClassLoader = new DexClassLoader(getPluginApkDestAbsPath(), getAppFileDirAbsPath(), null, PluginDemoApplication.getInstance().getClassLoader());
+        mPluginClassLoader = new DexClassLoader(getPluginApkDestAbsPath(), getAppFileDirAbsPath(), null, DemoApplication.getInstance().getClassLoader());
         mPluginAssetManager = buildPluginAssetManager();
-        mPluginResource = buildPluginResources();
+        mPluginResources = buildPluginResources();
+        mProxyResources = buildProxyResources();
     }
 
     public DexClassLoader getPluginClassLoader() {
@@ -84,7 +86,11 @@ public class PluginManager {
     }
 
     public Resources getPluginResources() {
-        return mPluginResource;
+        return mPluginResources;
+    }
+
+    public Resources getProxyResources() {
+        return mProxyResources;
     }
 
     /**
@@ -94,11 +100,11 @@ public class PluginManager {
     private void copyPluginApkFromAssetsToFileDir() {
 
         // 如果该位置已经有了，就不拷贝了
-        if (new File(getPluginApkDestAbsPath()).exists()) {
-            return;
-        }
+//        if (new File(getPluginApkDestAbsPath()).exists()) {
+//            return;
+//        }
 
-        AssetManager assetManager = PluginDemoApplication.getInstance().getAssets();
+        AssetManager assetManager = DemoApplication.getInstance().getAssets();
         InputStream in;
         BufferedInputStream bin;
         FileOutputStream fout;
@@ -148,11 +154,21 @@ public class PluginManager {
      * 创建代表插件apk资源信息的resouces
      */
     public Resources buildPluginResources() {
-        Resources appResources = PluginDemoApplication.getInstance().getResources();
+        Resources appResources = DemoApplication.getInstance().getResources();
         DisplayMetrics appDisplayMetrics = appResources.getDisplayMetrics();
         Configuration appConfiguration = appResources.getConfiguration();
         Resources pluginResources = new Resources(mPluginAssetManager, appDisplayMetrics, appConfiguration);
         return pluginResources;
     }
 
+    /**
+     * 创建Resources代理以便同时访问主工程和插件资源
+     * */
+    public Resources buildProxyResources() {
+        AssetManager assetManager = DemoApplication.getInstance().getAssets();
+        Resources appResources = DemoApplication.getInstance().getResources();
+        DisplayMetrics appDisplayMetrics = appResources.getDisplayMetrics();
+        Configuration appConfiguration = appResources.getConfiguration();
+        return new ProxyResources(assetManager, appDisplayMetrics, appConfiguration, appResources, getPluginResources());
+    }
 }

@@ -9,9 +9,9 @@ import android.content.Context;
  * Created by lilong on 18-5-18.
  */
 
-public class PluginDemoApplication extends Application {
+public class DemoApplication extends Application {
 
-    private static PluginDemoApplication sInstance;
+    private static DemoApplication sInstance;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -20,7 +20,7 @@ public class PluginDemoApplication extends Application {
         PluginManager.getInstance().init();
     }
 
-    public static PluginDemoApplication getInstance(){
+    public static DemoApplication getInstance(){
         return sInstance;
     }
 

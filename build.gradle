@@ -36,7 +36,8 @@ ext {
     targetSdkVersion = 25
     compileSdkVersion = 25
     minSdkVersion = 15
-    buildToolsVersion = "25.0.2"
-    v7SupportLib = 'com.android.support:appcompat-v7:25.1.0'
+    buildToolsVersion = "23.0.2"
+    v7SupportLib = "com.android.support:appcompat-v7:25.1.0"
+    gradleAndroidPlugin = "com.android.tools.build:gradle:2.2.0"
 }
 

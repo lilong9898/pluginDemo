@@ -7,10 +7,20 @@
     android:layout_height="match_parent"
     tools:context="com.lilong.plugindemo.ui.MainActivity">
 
+    <TextView
+        android:id="@+id/tv"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:textSize="20dp"
+        android:text="@string/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <RelativeLayout
         android:id="@+id/layoutFragContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_margin="50dp"/>
+        android:layout_margin="100dp"/>
 </RelativeLayout>

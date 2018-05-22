@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">pluginDemo</string>
+    <string name="tv_text">主工程文字</string>
 </resources>

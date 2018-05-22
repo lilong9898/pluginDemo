@@ -16,9 +16,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
 //    compile rootProject.ext.v7SupportLib
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided rootProject.ext.gradleAndroidPlugin
 }
