@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    compile rootProject.ext.v7SupportLib
+//    compile rootProject.ext.v7SupportLib
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided "com.android.tools.build:gradle:3.0.1"
 }
