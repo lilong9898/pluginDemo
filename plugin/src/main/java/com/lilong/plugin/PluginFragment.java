@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lilong.plugininterface.IPluginFragment;
+
 /**
  * 插件fragment
  */
 
-public class PluginFragment extends Fragment {
+public class PluginFragment extends Fragment implements IPluginFragment {
 
     private View fragmentRootView;
 
@@ -27,6 +29,7 @@ public class PluginFragment extends Fragment {
      * */
     private Context mPluginContext;
 
+    @Override
     public void setContext(Context context){
         mPluginContext = context;
     }

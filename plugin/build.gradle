@@ -36,4 +36,5 @@ dependencies {
 //    compile rootProject.ext.v7SupportLib
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided rootProject.ext.gradleAndroidPlugin
+    provided files("${rootProject.ext.pluginInterfaceJarPath}")
 }

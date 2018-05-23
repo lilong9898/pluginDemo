@@ -39,5 +39,8 @@ ext {
     buildToolsVersion = "23.0.2"
     v7SupportLib = "com.android.support:appcompat-v7:25.1.0"
     gradleAndroidPlugin = "com.android.tools.build:gradle:2.2.0"
+    pluginInterfaceJarName = "pluginInterface.jar"
+    pluginInterfaceJarDirRelativePath = "jar"
+    pluginInterfaceJarPath = String.join(File.separator, rootProject.findProject(":plugininterface").projectDir.absolutePath, pluginInterfaceJarDirRelativePath, pluginInterfaceJarName);
 }
 
