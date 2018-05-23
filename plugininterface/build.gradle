@@ -27,15 +27,15 @@ dependencies {
     compile v7SupportLib
 }
 
-task deleteJar(type: Delete) {
+task deletePluginInterfaceJar(type: Delete) {
     delete "${rootProject.ext.pluginInterfaceJarPath}"
 }
 
-task createJar(type: Copy){
+task createPluginInterfaceJar(type: Copy){
     from("build/intermediates/bundles/debug/")
     into("${rootProject.ext.pluginInterfaceJarDirRelativePath}")
     include("classes.jar")
     rename("classes.jar","${rootProject.ext.pluginInterfaceJarName}")
 }
 
-createJar.dependsOn(deleteJar, assemble)
+createPluginInterfaceJar.dependsOn(deletePluginInterfaceJar, assemble)

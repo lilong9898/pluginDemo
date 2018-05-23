@@ -39,8 +39,16 @@ ext {
     buildToolsVersion = "23.0.2"
     v7SupportLib = "com.android.support:appcompat-v7:25.1.0"
     gradleAndroidPlugin = "com.android.tools.build:gradle:2.2.0"
+
+    // 主工程调用插件，通过接口（因为类加载器的委托机制，主工程类加载器无法加载插件类，所以只能通过接口）主工程compile依赖，插件provided依赖
     pluginInterfaceJarName = "pluginInterface.jar"
-    pluginInterfaceJarDirRelativePath = "jar"
+    pluginInterfaceJarDirRelativePath = "pluginInterface"
     pluginInterfaceJarPath = String.join(File.separator, rootProject.findProject(":plugininterface").projectDir.absolutePath, pluginInterfaceJarDirRelativePath, pluginInterfaceJarName);
+
+    // 插件调用主工程方法的stub类（因为类加载器的委托机制，插件类加载器可以加载主工程类，所以在插件中直接调用主工程类），插件provided依赖
+    mainInterfaceJarName = "mainInterface.jar"
+    mainInterfaceJarDirRelativePath = "mainInterface"
+    mainInterfaceJarPath = String.join(File.separator, rootProject.findProject(":plugin").projectDir.absolutePath, mainInterfaceJarDirRelativePath, mainInterfaceJarName)
+
 }
 

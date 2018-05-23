@@ -25,3 +25,20 @@ dependencies {
     compile files("${rootProject.ext.pluginInterfaceJarPath}")
     provided rootProject.ext.gradleAndroidPlugin
 }
+
+task deleteMainInterfaceJar(type: Delete) {
+    delete "${rootProject.ext.mainInterfaceJarPath}"
+}
+
+task createJar(type: Jar){
+    
+}
+
+task createMainInterfaceJar(type: Copy){
+    from("build/intermediates/bundles/debug/")
+    into("${rootProject.ext.mainInterfaceJarDirRelativePath}")
+    include("classes.jar")
+    rename("classes.jar","${rootProject.ext.mainInterfaceJarName}")
+}
+
+createMainInterfaceJar.dependsOn(deleteMainInterfaceJar, assemble)
