@@ -26,7 +26,6 @@ public class PluginManager {
     private DexClassLoader mPluginClassLoader;
     private AssetManager mPluginAssetManager;
     private Resources mPluginResources;
-    private Resources mProxyResources;
     private Resources.Theme mPluginTheme;
 
     private static volatile PluginManager sInstance;
@@ -74,7 +73,6 @@ public class PluginManager {
         mPluginClassLoader = new DexClassLoader(getPluginApkDestAbsPath(), getAppFileDirAbsPath(), null, DemoApplication.getInstance().getClassLoader());
         mPluginAssetManager = buildPluginAssetManager();
         mPluginResources = buildPluginResources();
-        mProxyResources = buildProxyResources();
         mPluginTheme = buildPluginTheme();
     }
 
@@ -89,10 +87,6 @@ public class PluginManager {
 
     public Resources getPluginResources() {
         return mPluginResources;
-    }
-
-    public Resources getProxyResources() {
-        return mProxyResources;
     }
 
     public Resources.Theme getPluginTheme() {
@@ -165,17 +159,6 @@ public class PluginManager {
         Configuration appConfiguration = appResources.getConfiguration();
         Resources pluginResources = new Resources(mPluginAssetManager, appDisplayMetrics, appConfiguration);
         return pluginResources;
-    }
-
-    /**
-     * 创建Resources代理以便同时访问主工程和插件资源
-     */
-    public Resources buildProxyResources() {
-        AssetManager assetManager = DemoApplication.getInstance().getAssets();
-        Resources appResources = DemoApplication.getInstance().getResources();
-        DisplayMetrics appDisplayMetrics = appResources.getDisplayMetrics();
-        Configuration appConfiguration = appResources.getConfiguration();
-        return new ProxyResources(assetManager, appDisplayMetrics, appConfiguration, appResources, getPluginResources());
     }
 
     /**
