@@ -10,13 +10,20 @@ import android.content.res.Resources;
 
 public class PluginFragmentContext extends ContextWrapper {
 
+    private ClassLoader mPluginClassLoader;
     private Resources mPluginFragmentResources;
     private Resources.Theme mPluginFragmentTheme;
 
-    public PluginFragmentContext(Context baseContext, Resources pluginFragmentResources, Resources.Theme pluginFragmentTheme){
+    public PluginFragmentContext(Context baseContext, ClassLoader pluginClassLoader, Resources pluginFragmentResources, Resources.Theme pluginFragmentTheme){
         super(baseContext);
+        mPluginClassLoader = pluginClassLoader;
         mPluginFragmentResources = pluginFragmentResources;
         mPluginFragmentTheme = pluginFragmentTheme;
+    }
+
+    @Override
+    public ClassLoader getClassLoader() {
+        return mPluginClassLoader;
     }
 
     @Override
@@ -28,4 +35,5 @@ public class PluginFragmentContext extends ContextWrapper {
     public Resources.Theme getTheme() {
         return mPluginFragmentTheme;
     }
+
 }

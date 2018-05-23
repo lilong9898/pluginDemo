@@ -1,5 +1,6 @@
 package com.lilong.plugindemo.plugin;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -23,7 +24,7 @@ import dalvik.system.DexClassLoader;
 
 public class PluginManager {
 
-    private DexClassLoader mPluginClassLoader;
+    private ClassLoader mPluginClassLoader;
     private AssetManager mPluginAssetManager;
     private Resources mPluginResources;
     private Resources.Theme mPluginTheme;
@@ -70,14 +71,13 @@ public class PluginManager {
 
     public void init() {
         copyPluginApkFromAssetsToFileDir();
-        mPluginClassLoader = new DexClassLoader(getPluginApkDestAbsPath(), getAppFileDirAbsPath(), null, DemoApplication.getInstance().getClassLoader());
+        mPluginClassLoader = buildPluginClassLoader();
         mPluginAssetManager = buildPluginAssetManager();
         mPluginResources = buildPluginResources();
         mPluginTheme = buildPluginTheme();
     }
 
-    public DexClassLoader getPluginClassLoader() {
-        copyPluginApkFromAssetsToFileDir();
+    public ClassLoader getPluginClassLoader() {
         return mPluginClassLoader;
     }
 
@@ -129,6 +129,13 @@ public class PluginManager {
     }
 
     /**
+     * 创建用于加载插件代码的类加载器
+     * */
+    public ClassLoader buildPluginClassLoader(){
+        return new DexClassLoader(getPluginApkDestAbsPath(), getAppFileDirAbsPath(), null, DemoApplication.getInstance().getClassLoader());
+    }
+
+    /**
      * 创建用于解析插件apk资源的assetManager
      */
     public AssetManager buildPluginAssetManager() {
@@ -166,5 +173,12 @@ public class PluginManager {
      */
     public Resources.Theme buildPluginTheme() {
         return getPluginResources().newTheme();
+    }
+
+    /**
+     * 建立给插件fragment用的context
+     * */
+    public PluginFragmentContext buildPluginFragmentContext(Context hostContext){
+        return new PluginFragmentContext(hostContext, getPluginClassLoader(), getPluginResources(), getPluginTheme());
     }
 }
