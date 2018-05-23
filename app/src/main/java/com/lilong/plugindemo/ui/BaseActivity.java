@@ -6,20 +6,18 @@ import android.content.res.Resources;
 import com.lilong.plugindemo.plugin.PluginManager;
 
 /**
- * Created by lilong on 18-5-18.
+ * 基类
  */
 
 public class BaseActivity extends Activity {
 
+    /**
+     * 使用代理resources来处理这个activity收到的资源请求
+     * 代理resources可以根据资源id的package段的数字来区分是进一步请求主工程资源还是插件资源
+     * */
     @Override
     public Resources getResources() {
         return PluginManager.getInstance().getProxyResources();
     }
 
-    @Override
-    public Resources.Theme getTheme() {
-        Resources.Theme theme = getResources().newTheme();
-        theme.setTo(super.getTheme());
-        return theme;
-    }
 }

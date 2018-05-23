@@ -27,6 +27,7 @@ public class PluginManager {
     private AssetManager mPluginAssetManager;
     private Resources mPluginResources;
     private Resources mProxyResources;
+    private Resources.Theme mPluginTheme;
 
     private static volatile PluginManager sInstance;
 
@@ -74,6 +75,7 @@ public class PluginManager {
         mPluginAssetManager = buildPluginAssetManager();
         mPluginResources = buildPluginResources();
         mProxyResources = buildProxyResources();
+        mPluginTheme = buildPluginTheme();
     }
 
     public DexClassLoader getPluginClassLoader() {
@@ -91,6 +93,10 @@ public class PluginManager {
 
     public Resources getProxyResources() {
         return mProxyResources;
+    }
+
+    public Resources.Theme getPluginTheme() {
+        return mPluginTheme;
     }
 
     /**
@@ -132,21 +138,21 @@ public class PluginManager {
      * 创建用于解析插件apk资源的assetManager
      */
     public AssetManager buildPluginAssetManager() {
-            AssetManager pluginAssetManager = null;
-            try {
-                pluginAssetManager = AssetManager.class.newInstance();
-                Method methodAddAssetPath = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
-                methodAddAssetPath.setAccessible(true);
-                methodAddAssetPath.invoke(pluginAssetManager, getPluginApkDestAbsPath());
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+        AssetManager pluginAssetManager = null;
+        try {
+            pluginAssetManager = AssetManager.class.newInstance();
+            Method methodAddAssetPath = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
+            methodAddAssetPath.setAccessible(true);
+            methodAddAssetPath.invoke(pluginAssetManager, getPluginApkDestAbsPath());
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
         return pluginAssetManager;
     }
 
@@ -163,12 +169,19 @@ public class PluginManager {
 
     /**
      * 创建Resources代理以便同时访问主工程和插件资源
-     * */
+     */
     public Resources buildProxyResources() {
         AssetManager assetManager = DemoApplication.getInstance().getAssets();
         Resources appResources = DemoApplication.getInstance().getResources();
         DisplayMetrics appDisplayMetrics = appResources.getDisplayMetrics();
         Configuration appConfiguration = appResources.getConfiguration();
         return new ProxyResources(assetManager, appDisplayMetrics, appConfiguration, appResources, getPluginResources());
+    }
+
+    /**
+     * 创建插件的theme
+     */
+    public Resources.Theme buildPluginTheme() {
+        return getPluginResources().newTheme();
     }
 }
