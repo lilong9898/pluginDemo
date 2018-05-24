@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lilong.plugindemo.util.Util;
 import com.lilong.plugininterface.BasePluginFragment;
 
 /**
@@ -28,6 +30,9 @@ public class PluginFragment extends BasePluginFragment {
     private TextView tvTextByXml;
     private TextView tvTextBySelfSetText;
     private TextView tvTextByExternalSetText;
+
+    private Button btnCallPluginProjectToast;
+    private Button btnCallMainProjectToast;
 
     /**
      * 插件fragment的hostActivity仍然是主工程里的activity，
@@ -50,10 +55,23 @@ public class PluginFragment extends BasePluginFragment {
         tvTextByXml = (TextView) fragmentRootView.findViewById(R.id.tvTextByXml);
         tvTextBySelfSetText = (TextView) fragmentRootView.findViewById(R.id.tvTextBySelfSetText);
         tvTextByExternalSetText = (TextView) fragmentRootView.findViewById(R.id.tvTextByExternalSetText);
+        btnCallPluginProjectToast = (Button) fragmentRootView.findViewById(R.id.btnCallPluginProjectToast);
+        btnCallMainProjectToast = (Button) fragmentRootView.findViewById(R.id.btnCallMainProjectToast);
 
         tvTextBySelfSetText.setText(R.string.tvTextBySelfSetText);
         tvTextByExternalSetText.setText(getResources().getString(R.string.tvTextByExternalSetText));
-
+        btnCallPluginProjectToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), R.string.plugin_project_toast_text, Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnCallMainProjectToast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.showToast();
+            }
+        });
         return fragmentRootView;
     }
 
@@ -67,9 +85,4 @@ public class PluginFragment extends BasePluginFragment {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        Toast.makeText(getActivity(), R.string.plugin_project_toast_text, Toast.LENGTH_SHORT).show();
-    }
 }

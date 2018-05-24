@@ -30,10 +30,10 @@
             android:textSize="@dimen/textSize"/>
 
         <Button
-            android:id="@+id/btnShowPluginToast"
+            android:id="@+id/btnCallPluginProjectToast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_show_plugin_toast"
+            android:text="@string/btn_call_plugin_project_toast"
             android:textSize="@dimen/textSize"/>
 
         <Button

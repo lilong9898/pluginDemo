@@ -130,8 +130,8 @@ public class PluginManager {
 
     /**
      * 创建用于加载插件代码的类加载器
-     * */
-    public ClassLoader buildPluginClassLoader(){
+     */
+    public ClassLoader buildPluginClassLoader() {
         return new DexClassLoader(getPluginApkDestAbsPath(), getAppFileDirAbsPath(), null, DemoApplication.getInstance().getClassLoader());
     }
 
@@ -161,7 +161,7 @@ public class PluginManager {
      * 创建代表插件apk资源信息的resouces
      */
     public Resources buildPluginResources() {
-        Resources appResources = DemoApplication.getInstance().getResources();
+        Resources appResources = DemoApplication.getInstance().getBaseContext().getResources();
         DisplayMetrics appDisplayMetrics = appResources.getDisplayMetrics();
         Configuration appConfiguration = appResources.getConfiguration();
         Resources pluginResources = new Resources(mPluginAssetManager, appDisplayMetrics, appConfiguration);
@@ -177,8 +177,8 @@ public class PluginManager {
 
     /**
      * 建立给插件fragment用的context
-     * */
-    public PluginFragmentContext buildPluginFragmentContext(Context hostContext){
+     */
+    public PluginFragmentContext buildPluginFragmentContext(Context hostContext) {
         return new PluginFragmentContext(hostContext, getPluginClassLoader(), getPluginResources(), getPluginTheme());
     }
 }
