@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Plugin</string>
-    <string name="tvTextByXml">tvTextByXml</string>
-    <string name="tvTextBySelfSetText">tvTextBySelfSetText</string>
-    <string name="tvTextByExternalSetText">tvTextByExternalSetText</string>
+    <string name="tvTextByXml">插件xml设置的文字</string>
+    <string name="tvTextBySelfSetText">插件setText(id)设置的文字</string>
+    <string name="tvTextByExternalSetText">插件setText(getResources(id))设置的文字</string>
+    <string name="plugin_project_toast_text">自插件的toast文字</string>
 </resources>

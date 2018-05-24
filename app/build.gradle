@@ -22,23 +22,21 @@ android {
 dependencies {
 //    compile rootProject.ext.v7SupportLib
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile files("${rootProject.ext.pluginInterfaceJarPath}")
+    compile files("${rootProject.ext.pluginInterfaceJarAbsPath}")
     provided rootProject.ext.gradleAndroidPlugin
 }
 
 task deleteMainInterfaceJar(type: Delete) {
-    delete "${rootProject.ext.mainInterfaceJarPath}"
+    delete "${rootProject.ext.mainInterfaceJarAbsPath}"
 }
 
-task createJar(type: Jar){
-    
-}
-
-task createMainInterfaceJar(type: Copy){
-    from("build/intermediates/bundles/debug/")
-    into("${rootProject.ext.mainInterfaceJarDirRelativePath}")
-    include("classes.jar")
-    rename("classes.jar","${rootProject.ext.mainInterfaceJarName}")
+// 将app工程中的build/intermediates/classes/debug目录下的com.lilong.plugindemo中的class文件
+// 去掉BuildConfig.class和R.class后打成jar包
+task createMainInterfaceJar(type: Jar){
+    archiveName "${rootProject.ext.mainInterfaceJarName}"
+    destinationDir new File("${rootProject.ext.mainInterfaceJarDirAbsPath}")
+    from "build/intermediates/classes/debug"
+    exclude "**/BuildConfig.class", "**/R.class"
 }
 
 createMainInterfaceJar.dependsOn(deleteMainInterfaceJar, assemble)

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">pluginDemo</string>
     <string name="tv_text">主工程文字</string>
+    <string name="main_project_toast_text">来自主工程的toast文字</string>
 </resources>

@@ -28,14 +28,16 @@ dependencies {
 }
 
 task deletePluginInterfaceJar(type: Delete) {
-    delete "${rootProject.ext.pluginInterfaceJarPath}"
+    delete "${rootProject.ext.pluginInterfaceJarAbsPath}"
 }
 
-task createPluginInterfaceJar(type: Copy){
-    from("build/intermediates/bundles/debug/")
-    into("${rootProject.ext.pluginInterfaceJarDirRelativePath}")
-    include("classes.jar")
-    rename("classes.jar","${rootProject.ext.pluginInterfaceJarName}")
+// 将plugininterface工程build/intermediates/classes/debug目录下的com.lilong.plugininterface目录下的class文件，
+// 去掉BuildConfig.class和R.class后生成jar包
+task createPluginInterfaceJar(type: Jar){
+    archiveName "${rootProject.ext.pluginInterfaceJarName}"
+    destinationDir new File("${rootProject.ext.pluginInterfaceJarDirAbsPath}")
+    from "build/intermediates/classes/debug"
+    exclude "/android", "**/BuildConfig.class", "**/R.class"
 }
 
 createPluginInterfaceJar.dependsOn(deletePluginInterfaceJar, assemble)

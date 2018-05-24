@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lilong.plugininterface.IPluginFragment;
 
@@ -67,4 +68,9 @@ public class PluginFragment extends Fragment implements IPluginFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getActivity(), R.string.plugin_project_toast_text, Toast.LENGTH_SHORT).show();
+    }
 }
