@@ -1,9 +1,11 @@
 package com.lilong.plugindemo.plugin;
 
 import android.content.res.AssetManager;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -35,18 +37,18 @@ public class ProxyResources extends Resources {
 
     @Override
     public void getValue(int id, TypedValue outValue, boolean resolveRefs) throws NotFoundException {
-        if(isMainResourceId(id)){
+        if (isMainResourceId(id)) {
             mMainResources.getValue(id, outValue, resolveRefs);
-        }else{
+        } else {
             mPluginResources.getValue(id, outValue, resolveRefs);
         }
     }
 
     @Override
     public void getValue(String name, TypedValue outValue, boolean resolveRefs) throws NotFoundException {
-        try{
+        try {
             mMainResources.getValue(name, outValue, resolveRefs);
-        }catch (Exception e){
+        } catch (Exception e) {
             mPluginResources.getValue(name, outValue, resolveRefs);
         }
     }
@@ -57,6 +59,78 @@ public class ProxyResources extends Resources {
             return mMainResources.getLayout(id);
         } else {
             return mPluginResources.getLayout(id);
+        }
+    }
+
+    @Override
+    public float getDimension(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getDimension(id);
+        } else {
+            return mPluginResources.getDimension(id);
+        }
+    }
+
+    @Override
+    public int getDimensionPixelOffset(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getDimensionPixelOffset(id);
+        } else {
+            return mPluginResources.getDimensionPixelOffset(id);
+        }
+    }
+
+    @Override
+    public int getDimensionPixelSize(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getDimensionPixelSize(id);
+        } else {
+            return mPluginResources.getDimensionPixelSize(id);
+        }
+    }
+
+    @Override
+    public int getColor(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getColor(id);
+        } else {
+            return mPluginResources.getColor(id);
+        }
+    }
+
+    @Override
+    public ColorStateList getColorStateList(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getColorStateList(id);
+        } else {
+            return mPluginResources.getColorStateList(id);
+        }
+    }
+
+    @Override
+    public Drawable getDrawable(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getDrawable(id);
+        } else {
+            return mPluginResources.getDrawable(id);
+        }
+    }
+
+    @Override
+    public XmlResourceParser getAnimation(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getAnimation(id);
+        } else {
+            return mPluginResources.getAnimation(id);
+        }
+    }
+
+    @Override
+    public XmlResourceParser getXml(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getXml(id);
+        } else {
+            return mPluginResources.getXml(id);
         }
     }
 
@@ -79,6 +153,15 @@ public class ProxyResources extends Resources {
     }
 
     @Override
+    public String[] getStringArray(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getStringArray(id);
+        } else {
+            return mPluginResources.getStringArray(id);
+        }
+    }
+
+    @Override
     public CharSequence getText(int id) throws NotFoundException {
         if (isMainResourceId(id)) {
             return mMainResources.getString(id);
@@ -93,6 +176,24 @@ public class ProxyResources extends Resources {
             return mMainResources.getString(id, def);
         } else {
             return mPluginResources.getString(id, def);
+        }
+    }
+
+    @Override
+    public int getInteger(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getInteger(id);
+        } else {
+            return mPluginResources.getInteger(id);
+        }
+    }
+
+    @Override
+    public boolean getBoolean(int id) throws NotFoundException {
+        if (isMainResourceId(id)) {
+            return mMainResources.getBoolean(id);
+        } else {
+            return mPluginResources.getBoolean(id);
         }
     }
 

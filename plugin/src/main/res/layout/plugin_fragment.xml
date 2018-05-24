@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_blue_bright">
+                android:background="@color/plugin_background_color">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,20 +15,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tvTextByXml"
-            android:textSize="15sp"/>
+            android:textSize="@dimen/textSize"/>
 
         <TextView
             android:id="@+id/tvTextBySelfSetText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"/>
+            android:textSize="@dimen/textSize"/>
 
         <TextView
             android:id="@+id/tvTextByExternalSetText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"/>
+            android:textSize="@dimen/textSize"/>
 
+        <Button
+            android:id="@+id/btnShowPluginToast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_show_plugin_toast"
+            android:textSize="@dimen/textSize"/>
+
+        <Button
+            android:id="@+id/btnCallMainProjectToast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_call_main_project_toast"
+            android:textSize="@dimen/textSize"/>
     </LinearLayout>
 
 </RelativeLayout>
