@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-//    compile rootProject.ext.v7SupportLib
+    compile rootProject.ext.v7SupportLib
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files("${rootProject.ext.pluginInterfaceJarAbsPath}")
     provided rootProject.ext.gradleAndroidPlugin
@@ -32,7 +32,7 @@ task deleteMainInterfaceJar(type: Delete) {
 
 // 将app工程中的build/intermediates/classes/debug目录下的com.lilong.plugindemo中的class文件
 // 去掉BuildConfig.class和R.class后打成jar包
-task createMainInterfaceJar(type: Jar){
+task createMainInterfaceJar(type: Jar) {
     archiveName "${rootProject.ext.mainInterfaceJarName}"
     destinationDir new File("${rootProject.ext.mainInterfaceJarDirAbsPath}")
     from "build/intermediates/classes/debug"
@@ -40,3 +40,18 @@ task createMainInterfaceJar(type: Jar){
 }
 
 createMainInterfaceJar.dependsOn(deleteMainInterfaceJar, assemble)
+
+task deleteMainSupportV7InterfaceJar(type: Delete) {
+    delete "${rootProject.ext.mainSupportV7InterfaceDirAbsPath}"
+}
+
+// 因为插件不能直接依赖supportv7(定制的aapt会导致资源整合失败)
+// 所以将app工程中引入的supportv7的所有jar包拷贝到插件项目里，让插件项目provided依赖
+task createMainSupportV7InterfaceJar(type: Copy) {
+    from "build/intermediates/exploded-aar/com.android.support"
+    into "${rootProject.ext.mainSupportV7InterfaceDirAbsPath}"
+    include "**/jars/classes.jar"
+    exclude "**/aidl", "**/assets", "**/jni", "**/libs", "**/res"
+}
+
+createMainSupportV7InterfaceJar.dependsOn(deleteMainSupportV7InterfaceJar, assemble)

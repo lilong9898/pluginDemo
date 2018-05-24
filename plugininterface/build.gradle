@@ -24,7 +24,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile v7SupportLib
+    compile rootProject.ext.v7SupportLib
 }
 
 task deletePluginInterfaceJar(type: Delete) {

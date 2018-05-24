@@ -4,7 +4,7 @@ import com.android.build.gradle.api.BaseVariantOutput
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion 25
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
@@ -21,6 +21,10 @@ android {
         }
     }
 
+    // 因为引入了自动修改资源id package分段的aapt，所以插件工程中不能再依赖aar包或者有资源的第三方库，会出现问题
+    // 因为这些第三方库中的R文件已经存在了，是原生aapt生成的，而修改过的aapt只会从被规定的分段去找，所以会出问题
+    // 插件工程中定义的资源是没问题的，因为他们的R文件从一开始就是修改过的aapt生成的
+    // 另外从插件的定位来讲，插件不应有自己的主题，应该跟着主工程走，尤其对于纯fragment的插件
     aaptOptions.additionalParameters '--PLUG-resoure-proguard', '--PLUG-resoure-id', '0x71'
 
     applicationVariants.all { ApkVariant variant->
@@ -33,8 +37,10 @@ android {
 }
 
 dependencies {
-//    compile rootProject.ext.v7SupportLib
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided rootProject.ext.gradleAndroidPlugin
+    // provided依赖主工程界面类与插件界面类，以实现主工程调用插件和插件调用主工程
     provided files("${rootProject.ext.mainInterfaceJarAbsPath}", "${rootProject.ext.pluginInterfaceJarAbsPath}")
+    // provided依赖supportV7库的界面类，以便插件中使用supportV7
+    provided fileTree(dir: "${rootProject.ext.mainSupportV7InterfaceDirAbsPath}", include: ["**/classes.jar"])
 }

@@ -1,7 +1,7 @@
 package com.lilong.plugindemo.ui;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.lilong.plugindemo.R;
 import com.lilong.plugindemo.plugin.PluginManager;
@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity {
             Class c = PluginManager.getInstance().getPluginClassLoader().loadClass(PluginManager.PLUGIN_FRAGMENT_CLASS_NAME);
             Fragment pluginFragment = (Fragment) c.newInstance();
             ((IPluginFragment) pluginFragment).setContext(PluginManager.getInstance().buildPluginFragmentContext(this));
-            getFragmentManager().beginTransaction().replace(R.id.layoutFragContainer, pluginFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.layoutFragContainer, pluginFragment).commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

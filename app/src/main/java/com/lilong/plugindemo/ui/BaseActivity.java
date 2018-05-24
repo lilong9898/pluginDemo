@@ -1,9 +1,9 @@
 package com.lilong.plugindemo.ui;
 
-import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
 import com.lilong.plugindemo.plugin.PluginManager;
@@ -13,7 +13,7 @@ import com.lilong.plugindemo.plugin.ProxyResources;
  * 基类
  */
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
 
     private Resources mProxyResources;
 

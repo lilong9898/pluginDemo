@@ -45,10 +45,12 @@ ext {
     pluginInterfaceJarDirAbsPath = String.join(File.separator, rootProject.findProject(":plugininterface").projectDir.absolutePath, "pluginInterfaceJar");
     pluginInterfaceJarAbsPath = String.join(File.separator, pluginInterfaceJarDirAbsPath, pluginInterfaceJarName)
 
-    // 插件调用主工程方法的stub类（因为类加载器的委托机制，插件类加载器可以加载主工程类，所以在插件中直接调用主工程类），插件provided依赖
+    // 插件调用主工程代码的stub类的jar包（因为类加载器的委托机制，插件类加载器可以加载主工程类，所以在插件中直接调用主工程类），插件provided依赖
     mainInterfaceJarName = "mainInterface.jar"
     mainInterfaceJarDirAbsPath = String.join(File.separator, rootProject.findProject(":plugin").projectDir.absolutePath, "mainInterfaceJar")
     mainInterfaceJarAbsPath = String.join(File.separator, mainInterfaceJarDirAbsPath, mainInterfaceJarName)
 
+    // 插件调用supportv7代码的stub类的jar包
+    mainSupportV7InterfaceDirAbsPath = String.join(File.separator, rootProject.findProject(":plugin").projectDir.absolutePath, "mainSupportV7InterfaceJar")
 }
 

@@ -1,6 +1,5 @@
 package com.lilong.plugin;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lilong.plugininterface.IPluginFragment;
+import com.lilong.plugininterface.BasePluginFragment;
 
 /**
  * 插件fragment
@@ -22,7 +21,7 @@ import com.lilong.plugininterface.IPluginFragment;
  * (4) getContext方法返回插件context，这样进一步的getResources或getClassLoader就可以获取到插件的资源或类加载器
  */
 
-public class PluginFragment extends Fragment implements IPluginFragment {
+public class PluginFragment extends BasePluginFragment {
 
     private View fragmentRootView;
 
