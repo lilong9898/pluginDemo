@@ -40,4 +40,4 @@ task createPluginInterfaceJar(type: Jar){
     exclude "/android", "**/BuildConfig.class", "**/R.class"
 }
 
-createPluginInterfaceJar.dependsOn(deletePluginInterfaceJar, assemble)
+createPluginInterfaceJar.dependsOn deletePluginInterfaceJar, assemble
