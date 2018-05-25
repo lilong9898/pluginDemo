@@ -39,7 +39,7 @@ task createMainInterfaceJar(type: Jar) {
     exclude "**/BuildConfig.class", "**/R.class"
 }
 
-createMainInterfaceJar.dependsOn(deleteMainInterfaceJar, assemble)
+createMainInterfaceJar.dependsOn deleteMainInterfaceJar, assemble
 
 task deleteMainSupportV7InterfaceJar(type: Delete) {
     delete "${rootProject.ext.mainSupportV7InterfaceDirAbsPath}"
@@ -54,4 +54,4 @@ task createMainSupportV7InterfaceJar(type: Copy) {
     exclude "**/aidl", "**/assets", "**/jni", "**/libs", "**/res"
 }
 
-createMainSupportV7InterfaceJar.dependsOn(deleteMainSupportV7InterfaceJar, assemble)
+createMainSupportV7InterfaceJar.dependsOn deleteMainSupportV7InterfaceJar, assemble
