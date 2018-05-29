@@ -1,46 +1,22 @@
 package com.lilong.plugindemo.ui;
 
-import android.content.res.AssetManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 
 import com.lilong.plugindemo.plugin.PluginManager;
-import com.lilong.plugindemo.plugin.ProxyResources;
 
 /**
- * 基类
+ * 主工程的基类activity，其contextImpl中的classLoader和resource替换为兼容插件的classLoader和resource
  */
 
 public class BaseActivity extends AppCompatActivity {
 
-    private Resources mProxyResources;
-
-    /**
-     * 创建Resources代理以便同时访问主工程和插件资源
-     * 每个activity的getResources方法返回的resources都是不同的实例，因为每个activity都是不同的context，可以单独设置主题
-     * 所以这个操作要在activity里做
-     */
-    public Resources buildProxyResources() {
-        AssetManager activityAssetManager = super.getAssets();
-        Resources activityResources = super.getResources();
-        DisplayMetrics activityDisplayMetrics = activityResources.getDisplayMetrics();
-        Configuration activityConfiguration = activityResources.getConfiguration();
-        Resources pluginResources = PluginManager.getInstance().getPluginResources();
-        return new ProxyResources(activityAssetManager, activityDisplayMetrics, activityConfiguration, activityResources, pluginResources);
-    }
-
-    /**
-     * 使用代理resources来处理这个activity收到的资源请求
-     * 代理resources可以根据资源id的package段的数字来区分是进一步请求主工程资源还是插件资源
-     */
     @Override
-    public Resources getResources() {
-        if (mProxyResources == null) {
-            mProxyResources = buildProxyResources();
-        }
-        return mProxyResources;
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        PluginManager.getInstance().updateContextToPluginCompatible(newBase, PluginManager.getInstance().getPluginCompatibleClassLoader(), PluginManager.getInstance().buildPluginCompatibleResources(newBase));
     }
+
+
 
 }

@@ -3,8 +3,9 @@
     <string name="tvTextByXml">插件xml设置的文字</string>
     <string name="tvTextBySelfSetText">插件setText(id)设置的文字</string>
     <string name="tvTextByExternalSetText">插件setText(getResources(id))设置的文字</string>
-    <string name="plugin_project_toast_text">来自插件toast文字</string>
-    <string name="main_project_toast_text">来自主工程的toast文字</string>
-    <string name="btn_call_plugin_project_toast">在插件内显示toast</string>
-    <string name="btn_call_main_project_toast">调用主工程方法显示toast</string>
+    <string name="pluginProjectToastText">来自插件toast文字</string>
+    <string name="mainProjectToastText">来自主工程的toast文字</string>
+    <string name="btnCallPluginProjectToast">在插件内显示toast</string>
+    <string name="btnCallMainProjectToast">调用主工程方法显示toast</string>
+    <string name="methodCallFromMainProject">主工程调用插件的方法</string>
 </resources>

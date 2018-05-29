@@ -33,14 +33,14 @@
             android:id="@+id/btnCallPluginProjectToast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_call_plugin_project_toast"
+            android:text="@string/btnCallPluginProjectToast"
             android:textSize="@dimen/textSize"/>
 
         <Button
             android:id="@+id/btnCallMainProjectToast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/btn_call_main_project_toast"
+            android:text="@string/btnCallMainProjectToast"
             android:textSize="@dimen/textSize"/>
     </LinearLayout>
 
