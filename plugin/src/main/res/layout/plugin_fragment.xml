@@ -42,6 +42,20 @@
             android:layout_height="wrap_content"
             android:text="@string/btnCallMainProjectToast"
             android:textSize="@dimen/textSize"/>
+
+        <Button
+            android:id="@+id/btnPluginLoadMainClassByClassLoader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pluginLoadMainClassByClassLoader"
+            android:textSize="@dimen/textSize"/>
+
+        <Button
+            android:id="@+id/btnPluginLoadPluginClassByClassLoader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pluginLoadPluginClassByClassLoader"
+            android:textSize="@dimen/textSize"/>
     </LinearLayout>
 
 </RelativeLayout>

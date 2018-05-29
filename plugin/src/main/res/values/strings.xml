@@ -8,4 +8,6 @@
     <string name="btnCallPluginProjectToast">在插件内显示toast</string>
     <string name="btnCallMainProjectToast">调用主工程方法显示toast</string>
     <string name="methodCallFromMainProject">主工程调用插件的方法</string>
+    <string name="pluginLoadMainClassByClassLoader">插件通过context的classLoader加载主工程类</string>
+    <string name="pluginLoadPluginClassByClassLoader">插件通过context的classLoader加载插件类</string>
 </resources>

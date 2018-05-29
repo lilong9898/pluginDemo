@@ -1,4 +1,4 @@
-package com.lilong.plugin;
+package com.lilong.plugin.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lilong.plugin.R;
 import com.lilong.plugindemo.test.Test;
 import com.lilong.plugininterface.BasePluginFragment;
 
@@ -31,6 +32,12 @@ public class PluginFragment extends BasePluginFragment {
     private Button btnCallPluginProjectToast;
     private Button btnCallMainProjectToast;
 
+    private Button btnPluginLoadMainClassByClassLoader;
+    private Button btnPluginLoadPluginClassByClassLoader;
+
+    private static final String CLASS_LOADER_TEST_PLUGIN_CLASS_NAME = "com.lilong.plugin.test.Test";
+    private static final String CLASS_LOADER_TEST_MAIN_CLASS_NAME = "com.lilong.plugindemo.test.Test";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentRootView = inflater.inflate(R.layout.plugin_fragment, container, false);
@@ -39,6 +46,8 @@ public class PluginFragment extends BasePluginFragment {
         tvTextByExternalSetText = (TextView) fragmentRootView.findViewById(R.id.tvTextByExternalSetText);
         btnCallPluginProjectToast = (Button) fragmentRootView.findViewById(R.id.btnCallPluginProjectToast);
         btnCallMainProjectToast = (Button) fragmentRootView.findViewById(R.id.btnCallMainProjectToast);
+        btnPluginLoadMainClassByClassLoader = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadMainClassByClassLoader);
+        btnPluginLoadPluginClassByClassLoader = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadPluginClassByClassLoader);
 
         tvTextBySelfSetText.setText(R.string.tvTextBySelfSetText);
         tvTextByExternalSetText.setText(getResources().getString(R.string.tvTextByExternalSetText));
@@ -52,6 +61,29 @@ public class PluginFragment extends BasePluginFragment {
             @Override
             public void onClick(View v) {
                 Test.showToast();
+            }
+        });
+        btnPluginLoadMainClassByClassLoader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Class c = getContext().getClassLoader().loadClass(CLASS_LOADER_TEST_MAIN_CLASS_NAME);
+                    Toast.makeText(getActivity(), "类加载成功:" + c.getName(), Toast.LENGTH_SHORT).show();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        btnPluginLoadPluginClassByClassLoader.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class c = null;
+                try {
+                    c = getContext().getClassLoader().loadClass(CLASS_LOADER_TEST_PLUGIN_CLASS_NAME);
+                    Toast.makeText(getActivity(), "类加载成功:" + c.getName(), Toast.LENGTH_SHORT).show();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
         return fragmentRootView;

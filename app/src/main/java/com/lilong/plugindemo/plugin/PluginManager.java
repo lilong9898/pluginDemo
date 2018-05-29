@@ -49,7 +49,7 @@ public class PluginManager {
     /**
      * 插件fragment的类名
      */
-    public static final String PLUGIN_FRAGMENT_CLASS_NAME = "com.lilong.plugin.PluginFragment";
+    public static final String PLUGIN_FRAGMENT_CLASS_NAME = "com.lilong.plugin.fragment.PluginFragment";
 
     /**
      * 插件apk要被复制到的目录绝对路径
