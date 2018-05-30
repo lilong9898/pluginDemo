@@ -3,4 +3,4 @@
 - 用尽可能少的代码实现插件fragment的代码和资源的加载
 - 提供了生成插件框架所需的各种中间件的gradle代码
 ## 演示
-![](./demo/demo.png)
+![](./demo/demo.png　=10)
