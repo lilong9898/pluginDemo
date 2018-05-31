@@ -13,6 +13,9 @@
 ![](./demo/project_structure.png)
 
 3. 按顺序执行以下gradle task:
+
 ![](./demo/task_createPluginInterface.png)　　
+
 ![](./demo/task_createMainInterfaceJar.png)
+
 ![](./demo/task_createMainSupportV7InterfaceJar.png)
