@@ -1,5 +1,6 @@
 package com.lilong.plugin.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class PluginFragment extends BasePluginFragment {
     private static final String CLASS_LOADER_TEST_PLUGIN_CLASS_NAME = "com.lilong.plugin.test.Test";
     private static final String CLASS_LOADER_TEST_MAIN_CLASS_NAME = "com.lilong.plugindemo.test.Test";
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentRootView = inflater.inflate(R.layout.plugin_fragment, container, false);
