@@ -19,3 +19,20 @@
 ![](./demo/task_createMainInterfaceJar.png)
 
 ![](./demo/task_createMainSupportV7InterfaceJar.png)
+
+![](./demo/task_plugin_assembleDebug.png)
+
+4. 运行：
+
+![](./demo/run.png)
+
+## 实现目标
+- 主工程能加载了插件apk中的fragment
+- 主工程能调用插件中的代码
+- 插件能调用自己和主工程的代码
+- 主工程和插件能找到各自的资源
+- 主工程和插件的资源能出现在同一个activity中
+- 主工程和插件能使用共同的supportV7包和配套主题
+
+## 原理
+### 工程
