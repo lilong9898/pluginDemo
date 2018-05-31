@@ -11,13 +11,17 @@
 ![](./demo/demo.png)
 
 ## 如何运行
-1. 安装23.0.2版本的build-tools
-2. 在项目的build-tools/23.0.2目录中的三个平台的aapt中，选择合适自己平台的aapt，覆盖自己android sdk目录中build-tools/23.0.2下的aapt
-3. 执行gradle sync以下载必要的依赖，完成后的工程结构:
+1. 通过Android Studio的package manager安装23.0.2版本的build-tools，和android 25 platform
+2. 项目使用的gradle版本是3.5，android gradle plugin版本是2.2.0，如果没装的话可以提前下载
+3. 在项目的build-tools/23.0.2目录中的三个平台的aapt中，选择合适自己平台的aapt，覆盖自己android sdk目录中build-tools/23.0.2下的aapt，记得备份原有的aapt:
+
+![](./demo/replace_aapt.png)
+
+4. 打开项目，执行gradle sync以下载必要的依赖，完成后的工程结构:
 
 ![](./demo/project_structure.png)
 
-4. 按顺序执行以下gradle task:
+5. 每次运行前，请按顺序执行以下gradle task:
 
 ![](./demo/task_createPluginInterface.png)　　
 
@@ -27,7 +31,11 @@
 
 ![](./demo/task_plugin_assembleDebug.png)
 
-5. 运行：
+或者直接把这几个task设置到AS的run configuration里：
+
+![](./demo/modify_configuration.png)
+
+6. 运行：
 
 ![](./demo/run.png)
 
