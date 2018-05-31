@@ -49,5 +49,13 @@
 - 主工程和插件的资源能出现在同一个activity中
 - 主工程和插件能使用共同的supportV7包和配套主题
 
-## 原理
-### 工程
+## 构建和运行流程
+### 工程结构
+- app模块是主工程，使用com.android.application的plugin，是app类型的module
+- plugin模块是插件工程，使用com.android.application的plugin，也是app类型的module
+- plugininterface模块是生成主工程和插件工程的通信接口jar包的工程，使用com.android.library的plugin，是library类型的module
+#### 构建流程
+1. :plugininterface:createPluginInterfaceJar的gradle task会将plugininterface工程中的接口代码打成jar包，放在其pluginInterfaceJar目录下,因为app工程以compile形式依赖此jar包，plugin工程以provided形式依赖此jar包，所以app和plugin工程在编译时就可以在相同的接口代码上实现具体功能，在运行时，主工程可以通过这些接口代码来调用插件方法
+2. :app:createMainInterfaceJar的gradle task会将app工程中的所有代码打成jar包，放在plugin工程的mainInterfaceJar目录下，plugin工程以provided形式依赖此jar包，所以plugin工程在编译时可以使用主工程代码，在运行时因为类加载器的委托机制，在加载主工程代码时，会通过插件类加载器的上级加载器，即主工程的类加载器来加载，所以也可以使用主工程代码
+3. :app:createMainSupportV7InterfaceJar的gradle task会将主工程依赖的supportV7包的代码打成jar包，放在plugin工程的mainSupportV7InterfaceJar目录下，plugin工程以provided形式依赖此jar包，所以与上一条类似，使的编译和运行时插件可以使用supportV7包的代码
+4. :plugin:assembleDebug的gradle task会构建插件工程，生成插件apk并放在主工程的src/main/assets目录下，主工程运行时会从这个位置提取插件apk，复制到合适位置并加载，完成插件加载过程
