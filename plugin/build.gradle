@@ -34,6 +34,29 @@ android {
             output.outputFile = new File(mainProjectAssetsFolderAbsPath);
         }
     }
+
+    // gradle的mergeDebugResources task会过滤掉public.xml，但aapt是支持public.xml的
+    // 所以用下面代码在mergeDebugResources task执行完后把public.xml拷贝到对应目录，为后续aapt提供输入，
+    // 使得aapt可以固定public.xml中规定的资源的资源id
+    afterEvaluate {
+        for (variant in android.applicationVariants) {
+            def scope = variant.getVariantData().getScope()
+            String mergeTaskName = scope.getMergeResourcesTask().name
+            def mergeTask = tasks.getByName(mergeTaskName)
+
+            mergeTask.doLast {
+                copy {
+                    int i=0
+                    from(android.sourceSets.main.res.srcDirs) {
+                        include 'values/public.xml'
+                        rename 'public.xml', (i++ == 0? "public.xml": "public_${i}.xml")
+                    }
+
+                   into(mergeTask.outputDir)
+                }
+            }
+        }
+    }
 }
 
 dependencies {

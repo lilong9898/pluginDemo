@@ -16,11 +16,19 @@
         android:text="@string/tv_text"
         android:textSize="20dp"/>
 
+    <TextView
+        android:id="@+id/tvTextUsePluginResource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"/>
+
     <Button
         android:id="@+id/btnMainCallPluginMethod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv"
+        android:layout_below="@+id/tvTextUsePluginResource"
         android:layout_centerHorizontal="true"
         android:text="主工程调用插件方法"
         android:textSize="20dp"/>

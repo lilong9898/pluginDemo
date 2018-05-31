@@ -29,6 +29,12 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize"/>
 
+        <TextView
+            android:id="@+id/tvTextUseMainResource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textSize"/>
+
         <Button
             android:id="@+id/btnCallPluginProjectToast"
             android:layout_width="wrap_content"

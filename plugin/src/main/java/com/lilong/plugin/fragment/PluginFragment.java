@@ -28,6 +28,7 @@ public class PluginFragment extends BasePluginFragment {
     private TextView tvTextByXml;
     private TextView tvTextBySelfSetText;
     private TextView tvTextByExternalSetText;
+    private TextView tvTextUseMainResource;
 
     private Button btnCallPluginProjectToast;
     private Button btnCallMainProjectToast;
@@ -48,9 +49,11 @@ public class PluginFragment extends BasePluginFragment {
         btnCallMainProjectToast = (Button) fragmentRootView.findViewById(R.id.btnCallMainProjectToast);
         btnPluginLoadMainClassByClassLoader = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadMainClassByClassLoader);
         btnPluginLoadPluginClassByClassLoader = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadPluginClassByClassLoader);
+        tvTextUseMainResource = (TextView) fragmentRootView.findViewById(R.id.tvTextUseMainResource);
 
         tvTextBySelfSetText.setText(R.string.tvTextBySelfSetText);
         tvTextByExternalSetText.setText(getResources().getString(R.string.tvTextByExternalSetText));
+        tvTextUseMainResource.setText(0x7f109998);
         btnCallPluginProjectToast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

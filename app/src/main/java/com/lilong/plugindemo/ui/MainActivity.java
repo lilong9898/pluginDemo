@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.lilong.plugindemo.R;
 import com.lilong.plugindemo.plugin.PluginManager;
@@ -12,12 +13,14 @@ import com.lilong.plugininterface.IPluginFragment;
 public class MainActivity extends BaseActivity {
 
     private Button mBtnMainCallPluginMethod;
+    private TextView tvTextUsePluginResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mBtnMainCallPluginMethod = (Button) findViewById(R.id.btnMainCallPluginMethod);
+        tvTextUsePluginResource = (TextView) findViewById(R.id.tvTextUsePluginResource);
         mBtnMainCallPluginMethod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -25,6 +28,7 @@ public class MainActivity extends BaseActivity {
                 ((IPluginFragment) pluginFragment).callPluginMethod();
             }
         });
+        tvTextUsePluginResource.setText(0x71109998);
     }
 
     @Override
