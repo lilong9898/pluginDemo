@@ -144,7 +144,7 @@ public class PluginManager {
         return new Resources(buildPluginCompatibleAssetManager(baseContext), appDisplayMetrics, appConfiguration);
     }
 
-    /** -----------------------------替换某个contextImpl中的mResources--------------------*/
+    /** -----------------------------替换某个contextImpl中的mClassLoader和mResources--------------------*/
     public void updateContextToPluginCompatible(Context baseContext, ClassLoader pluginCompatibleClassLoader, Resources pluginCompatibleResources){
         // 替换baseContext中的mResources，这样就足够支持同时访问主工程和插件资源了，为了保险把baseContext中的 mPackageInfo中的mResources也换掉
         Tools.setField(baseContext, "mResources", pluginCompatibleResources);
