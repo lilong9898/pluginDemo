@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lilong.plugin.R;
+import com.lilong.plugindemo.application.DemoApplication;
 import com.lilong.plugindemo.test.Test;
 import com.lilong.plugininterface.BasePluginFragment;
 
@@ -34,23 +35,27 @@ public class PluginFragment extends BasePluginFragment {
     private Button btnCallPluginProjectToast;
     private Button btnCallMainProjectToast;
 
-    private Button btnPluginLoadMainClassByClassLoader;
-    private Button btnPluginLoadPluginClassByClassLoader;
+    private Button btnPluginLoadMainClass;
+    private Button btnPluginLoadPluginClass;
+
+    private Button btnPluginGetDemoApplicationInstance;
 
     private static final String CLASS_LOADER_TEST_PLUGIN_CLASS_NAME = "com.lilong.plugin.test.Test";
     private static final String CLASS_LOADER_TEST_MAIN_CLASS_NAME = "com.lilong.plugindemo.test.Test";
+    private static final String CLASS_LOADER_TEST_DEMO_APPLICATION_CLASS_NAME = "com.lilong.plugindemo.application.DemoApplication";
 
     @SuppressLint("ResourceType")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentRootView = inflater.inflate(R.layout.plugin_fragment, container, false);
         tvTextByXml = (TextView) fragmentRootView.findViewById(R.id.tvTextByXml);
         tvTextBySelfSetText = (TextView) fragmentRootView.findViewById(R.id.tvTextBySelfSetText);
         tvTextByExternalSetText = (TextView) fragmentRootView.findViewById(R.id.tvTextByExternalSetText);
         btnCallPluginProjectToast = (Button) fragmentRootView.findViewById(R.id.btnCallPluginProjectToast);
         btnCallMainProjectToast = (Button) fragmentRootView.findViewById(R.id.btnCallMainProjectToast);
-        btnPluginLoadMainClassByClassLoader = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadMainClassByClassLoader);
-        btnPluginLoadPluginClassByClassLoader = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadPluginClassByClassLoader);
+        btnPluginLoadMainClass = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadMainClass);
+        btnPluginLoadPluginClass = (Button) fragmentRootView.findViewById(R.id.btnPluginLoadPluginClass);
+        btnPluginGetDemoApplicationInstance = (Button) fragmentRootView.findViewById(R.id.btnPluginGetDemoApplicationInstance);
         tvTextUseMainResource = (TextView) fragmentRootView.findViewById(R.id.tvTextUseMainResource);
 
         tvTextBySelfSetText.setText(R.string.tvTextBySelfSetText);
@@ -68,7 +73,7 @@ public class PluginFragment extends BasePluginFragment {
                 Test.showToast();
             }
         });
-        btnPluginLoadMainClassByClassLoader.setOnClickListener(new View.OnClickListener() {
+        btnPluginLoadMainClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -79,7 +84,7 @@ public class PluginFragment extends BasePluginFragment {
                 }
             }
         });
-        btnPluginLoadPluginClassByClassLoader.setOnClickListener(new View.OnClickListener() {
+        btnPluginLoadPluginClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Class c = null;
@@ -89,6 +94,19 @@ public class PluginFragment extends BasePluginFragment {
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        btnPluginGetDemoApplicationInstance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class c = null;
+                try {
+                    c = getContext().getClassLoader().loadClass(CLASS_LOADER_TEST_DEMO_APPLICATION_CLASS_NAME);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                DemoApplication instance = DemoApplication.getInstance();
+                Toast.makeText(getActivity(), "Class object = " + c + ", \ninstance = " + instance, Toast.LENGTH_LONG).show();
             }
         });
         return fragmentRootView;

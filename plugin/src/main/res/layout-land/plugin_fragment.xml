@@ -44,17 +44,17 @@
             android:textSize="@dimen/textSize"/>
 
         <Button
-            android:id="@+id/btnPluginLoadMainClassByClassLoader"
+            android:id="@+id/btnPluginLoadMainClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pluginLoadMainClassByClassLoader"
+            android:text="@string/pluginLoadMainClass"
             android:textSize="@dimen/textSize"/>
 
         <Button
-            android:id="@+id/btnPluginLoadPluginClassByClassLoader"
+            android:id="@+id/btnPluginLoadPluginClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pluginLoadPluginClassByClassLoader"
+            android:text="@string/pluginLoadPluginClass"
             android:textSize="@dimen/textSize"/>
     </LinearLayout>
 

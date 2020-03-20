@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context="com.lilong.plugindemo.ui.MainActivity">
 
     <TextView
@@ -27,9 +28,16 @@
         android:id="@+id/btnMainCallPluginMethod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:text="主工程调用插件方法"
-        android:textSize="20dp"/>
+        android:textSize="15sp"/>
+
+    <Button
+        android:id="@+id/btnMainGetDemoApplicationInstance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="主工程获取DemoApplication.getInstance"
+        android:textAllCaps="false"
+        android:textSize="15sp" />
 
     <View
         android:layout_width="match_parent"

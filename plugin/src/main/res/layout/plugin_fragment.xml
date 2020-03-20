@@ -39,6 +39,7 @@
             android:id="@+id/btnCallPluginProjectToast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="@string/btnCallPluginProjectToast"
             android:textSize="@dimen/textSize"/>
 
@@ -46,22 +47,33 @@
             android:id="@+id/btnCallMainProjectToast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
             android:text="@string/btnCallMainProjectToast"
             android:textSize="@dimen/textSize"/>
 
         <Button
-            android:id="@+id/btnPluginLoadMainClassByClassLoader"
+            android:id="@+id/btnPluginLoadMainClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pluginLoadMainClassByClassLoader"
+            android:text="@string/pluginLoadMainClass"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize" />
+
+        <Button
+            android:id="@+id/btnPluginLoadPluginClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pluginLoadPluginClass"
+            android:textAllCaps="false"
             android:textSize="@dimen/textSize"/>
 
         <Button
-            android:id="@+id/btnPluginLoadPluginClassByClassLoader"
+            android:id="@+id/btnPluginGetDemoApplicationInstance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pluginLoadPluginClassByClassLoader"
-            android:textSize="@dimen/textSize"/>
+            android:text="@string/pluginGetDemoApplicationInstance"
+            android:textAllCaps="false"
+            android:textSize="@dimen/textSize" />
     </LinearLayout>
 
 </RelativeLayout>

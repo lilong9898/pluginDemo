@@ -9,6 +9,7 @@
     <string name="btnCallPluginProjectToast">在插件内显示toast</string>
     <string name="btnCallMainProjectToast">调用主工程方法显示toast</string>
     <string name="methodCallFromMainProject">主工程调用插件的方法</string>
-    <string name="pluginLoadMainClassByClassLoader">插件通过context的classLoader加载主工程类</string>
-    <string name="pluginLoadPluginClassByClassLoader">插件通过context的classLoader加载插件类</string>
+    <string name="pluginLoadMainClass">插件通过加载自己的DexClassLoader加载主工程类</string>
+    <string name="pluginLoadPluginClass">插件通过加载自己的DexClassLoader加载插件类</string>
+    <string name="pluginGetDemoApplicationInstance">插件通过加载自己的DexClassLoader获取DemoApplication.getInstance</string>
 </resources>

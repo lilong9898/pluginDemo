@@ -6,15 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lilong.plugindemo.R;
+import com.lilong.plugindemo.application.DemoApplication;
 import com.lilong.plugindemo.plugin.PluginManager;
 import com.lilong.plugininterface.IPluginFragment;
 
 public class MainActivity extends BaseActivity {
 
     private Button mBtnMainCallPluginMethod;
+    private Button mBtnMainGetDemoApplicationInstance;
     private TextView tvTextUsePluginResource;
+
+    private static final String CLASS_LOADER_TEST_DEMO_APPLICATION_CLASS_NAME = "com.lilong.plugindemo.application.DemoApplication";
 
     @SuppressLint("ResourceType")
     @Override
@@ -28,6 +33,20 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 Fragment pluginFragment = getSupportFragmentManager().findFragmentById(R.id.layoutFragContainer);
                 ((IPluginFragment) pluginFragment).callPluginMethod();
+            }
+        });
+        mBtnMainGetDemoApplicationInstance = (Button) findViewById(R.id.btnMainGetDemoApplicationInstance);
+        mBtnMainGetDemoApplicationInstance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Class c = null;
+                try {
+                    c = getClassLoader().loadClass(CLASS_LOADER_TEST_DEMO_APPLICATION_CLASS_NAME);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                DemoApplication instance = DemoApplication.getInstance();
+                Toast.makeText(MainActivity.this, "Class object = " + c + ", \ninstance = " + instance, Toast.LENGTH_LONG).show();
             }
         });
         tvTextUsePluginResource.setText(0x71109998);
