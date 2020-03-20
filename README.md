@@ -13,7 +13,7 @@
 ## 如何运行
 1. 通过Android Studio的package manager安装23.0.2版本的build-tools，和android 25 platform
 2. 项目使用的gradle版本是3.5，android gradle plugin版本是2.2.0，如果没装的话可以提前下载
-3. 在项目的build-tools/23.0.2目录中的三个平台的aapt中，选择合适自己平台的aapt，覆盖自己android sdk目录中build-tools/23.0.2下的aapt，记得备份原有的aapt:
+3. 在项目的build-tools/23.0.2目录中的三个平台的aapt中，选择合适自己平台的aapt，覆盖自己android sdk目录中build-tools/23.0.2下的aapt，<b>并加上可执行权限</b>，记得备份原有的aapt:
 
 ![](./demo/replace_aapt.png)
 
